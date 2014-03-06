@@ -4,6 +4,8 @@
  */
 package message;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author daryljohnston
@@ -15,7 +17,11 @@ public class Message {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Buffer buffer = new Buffer();
+        Semaphore s = new Semaphore(1);//creates a semaphore that the producers and 
+        Buffer buffer = new Buffer();//messages will be stored here
+        
+        Producer producer = new Producer(s,buffer);
+        
         
         
         

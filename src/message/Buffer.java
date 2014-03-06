@@ -13,14 +13,37 @@ import java.util.concurrent.Semaphore;
 public class Buffer {
   
     String message;
-    Semaphore s = new Semaphore(1);
+    Semaphore semaphore;
+    boolean isEmpty;
     
+    
+    
+    
+    public Buffer(Semaphore s){
+    semaphore = s;
+    }
+    
+    
+     public Buffer(){
+        
+    }
     
     
     public void addMessage(String s){
     
     message = s;
     
+    }
+    
+    public String readMessage(){
+    return message;
+    
+    }
+    
+    public Boolean isEmpty(){
+    //todo add a system where it checks if the message has been read by all of the users
+    
+    return null;
     }
     
 }

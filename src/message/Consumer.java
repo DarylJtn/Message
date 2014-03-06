@@ -8,6 +8,16 @@ package message;
  *
  * @author daryljohnston
  */
-public class Consumer {
+public class Consumer extends Thread {
     
+    
+    
+    
+    
+    @Override
+    public void run() {
+    
+    
+    
+    }
 }
