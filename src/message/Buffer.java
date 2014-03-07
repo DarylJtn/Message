@@ -14,7 +14,7 @@ public class Buffer {
   
     String message;
     Semaphore semaphore;
-    boolean isEmpty;
+    boolean isEmpty = true;
     
     
     
@@ -43,7 +43,7 @@ public class Buffer {
     public Boolean isEmpty(){
     //todo add a system where it checks if the message has been read by all of the users
     
-    return null;
+    return isEmpty;
     }
     
 }

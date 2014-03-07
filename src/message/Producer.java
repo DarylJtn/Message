@@ -19,6 +19,11 @@ public class Producer extends Thread {
   Buffer buffer;
   Random randString = new Random();
   
+  public void postMessage(){
+  buffer.addMessage("Random Message Goes here");
+  buffer.isEmpty=false;
+  
+  }
   
   
   //take global spmaphore and buffer class
@@ -55,8 +60,8 @@ public class Producer extends Thread {
             }
     }
     
-    
-    
+    //Do the opperations that adds the message to the buffer
+    postMessage();
     
     }
   
