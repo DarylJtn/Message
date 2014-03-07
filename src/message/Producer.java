@@ -20,6 +20,7 @@ public class Producer extends Thread {
   Random randString = new Random();
   
   public void postMessage(){
+  System.out.println("Posting Message to Buffer");
   buffer.addMessage("Random Message Goes here");
   buffer.isEmpty=false;
   
@@ -35,6 +36,8 @@ public class Producer extends Thread {
   
     @Override
     public void run() {
+        
+        while(true){
     //System.out.println(generateString());
      
       //try to aquire the semaphore   
@@ -62,9 +65,10 @@ public class Producer extends Thread {
     
     //Do the opperations that adds the message to the buffer
     postMessage();
-    
+    semaphore.release();
+    Delay.skip(10);
     }
-  
+    }
     
     public static String generateString(Random rng, String characters, int length)
 {
