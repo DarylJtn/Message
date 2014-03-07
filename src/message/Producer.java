@@ -21,7 +21,7 @@ public class Producer extends Thread {
   
   
   
-  
+  //take global spmaphore and buffer class
   public Producer(Semaphore s,Buffer b){
   semaphore = s;
   buffer = b;
@@ -31,7 +31,8 @@ public class Producer extends Thread {
     @Override
     public void run() {
     //System.out.println(generateString());
-       
+     
+      //try to aquire the semaphore   
       try {
       semaphore.acquire();   
       }
@@ -39,11 +40,12 @@ public class Producer extends Thread {
         {System.out.println(e);}
         
         
-        
-    while(!buffer.isEmpty){
-       semaphore.release(); 
+        //check if ther is a space in the buffer
+       
+    while(!buffer.isEmpty){//while buffer is full
+       semaphore.release(); //release the semaphore
        System.out.println("Unable to add message to buffer");
-       Delay.skip(10);
+       Delay.skip(10);//and delay for a while and check the buffer again.
            
             try {
                 semaphore.acquire();
