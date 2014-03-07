@@ -7,6 +7,8 @@ package message;
 import java.util.concurrent.Semaphore;
 import java.lang.Object;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,10 +31,31 @@ public class Producer extends Thread {
     @Override
     public void run() {
     //System.out.println(generateString());
+       
+      try {
+      semaphore.acquire();   
+      }
+      catch ( InterruptedException e)
+        {System.out.println(e);}
+        
+        
+        
     while(!buffer.isEmpty){
-    
-    
+       semaphore.release(); 
+       System.out.println("Unable to add message to buffer");
+       Delay.skip(10);
+           
+            try {
+                semaphore.acquire();
+            }
+            catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
     }
+    
+    
+    
+    
     }
   
     

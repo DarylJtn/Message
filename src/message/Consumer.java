@@ -4,6 +4,8 @@
  */
 package message;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author daryljohnston
@@ -11,7 +13,13 @@ package message;
 
 
 public class Consumer extends Thread {
+    Semaphore semaphore;
+    Buffer buffer;
     
+    public Consumer(Semaphore s,Buffer b){
+        semaphore = s;
+        buffer = b;
+       }
     
     
     

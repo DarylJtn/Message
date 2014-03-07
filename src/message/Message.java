@@ -21,9 +21,14 @@ public class Message {
         Buffer buffer = new Buffer();//messages will be stored here
         
         Producer producer = new Producer(s,buffer);
+        producer.start();
         
-        
-        
+        Consumer con1 = new Consumer(s,buffer);
+        con1.start();
+        Consumer con2 = new Consumer(s,buffer);
+        con2.start();
+        Consumer con3 = new Consumer(s,buffer);
+        con3.start();
         
     }
 }
