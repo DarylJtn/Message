@@ -20,11 +20,23 @@ public class Producer extends Thread {
   Random randString = new Random();
   
   public void postMessage(){
-  System.out.println("Posting Message to Buffer");
-  buffer.addMessage("Random Message Goes here");
+  System.out.println("Posting Message to Buffer:  "+generateString(randString));
+
+  buffer.addMessage(generateString(randString));
   buffer.isEmpty=false;
   
+  
   }
+    public static String generateString(Random rng)
+{
+    String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char[] text = new char[20];
+    for (int i = 0; i < 20; i++)
+    {
+        text[i] = characters.charAt(rng.nextInt(characters.length()));
+    }
+    return new String(text);
+}
   
   
   //take global spmaphore and buffer class
