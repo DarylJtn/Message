@@ -13,12 +13,12 @@ import java.util.concurrent.Semaphore;
 
 
 public class Consumer extends Thread {
-    Semaphore semaphore;
+    
     Buffer buffer;
     
-    public Consumer(Semaphore s,Buffer b){
-        semaphore = s;
-        buffer = b;
+    public Consumer(Buffer b){
+    
+        this.buffer = b;
        }
     
     

@@ -11,7 +11,7 @@ import java.util.concurrent.Semaphore;
  * @author daryljohnston
  */
 public class Buffer {
-  
+    Semaphore mutex = new Semaphore(1);
     String message;
     Semaphore semaphore;
     boolean isEmpty = true;

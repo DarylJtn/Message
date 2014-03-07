@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author daryljohnston
  */
 public class Producer extends Thread {
-  Semaphore semaphore;
+ 
   Buffer buffer;
   Random randString = new Random();
   
@@ -40,8 +40,8 @@ public class Producer extends Thread {
   
   
   //take global spmaphore and buffer class
-  public Producer(Semaphore s,Buffer b){
-  semaphore = s;
+  public Producer(Buffer b){
+
   buffer = b;
   }
   
@@ -51,7 +51,7 @@ public class Producer extends Thread {
         
         while(true){
     //System.out.println(generateString());
-     
+  /*   
       //try to aquire the semaphore   
       try {
       semaphore.acquire();   
@@ -78,9 +78,11 @@ public class Producer extends Thread {
     //Do the opperations that adds the message to the buffer
     postMessage();
     semaphore.release();
-    Delay.skip(10);
-    }
-    }
+    Delay.skip(10);*/
+  
+        
+        }
+        }
     
     public static String generateString(Random rng, String characters, int length)
 {

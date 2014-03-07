@@ -17,17 +17,17 @@ public class Message {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Semaphore s = new Semaphore(1);//creates a semaphore that the producers and 
+       
         Buffer buffer = new Buffer();//messages will be stored here
         
-        Producer producer = new Producer(s,buffer);
+        Producer producer = new Producer(buffer);
         producer.start();
         
-        Consumer con1 = new Consumer(s,buffer);
+        Consumer con1 = new Consumer(buffer);
         con1.start();
-        Consumer con2 = new Consumer(s,buffer);
+        Consumer con2 = new Consumer(buffer);
         con2.start();
-        Consumer con3 = new Consumer(s,buffer);
+        Consumer con3 = new Consumer(buffer);
         con3.start();
         
     }
