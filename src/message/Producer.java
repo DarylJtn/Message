@@ -53,40 +53,7 @@ public class Producer extends Thread {
      Delay.idleUpTo(3);
 
             
-            
-            
-            
-    //System.out.println(generateString());
-  /*   
-      //try to aquire the semaphore   
-      try {
-      semaphore.acquire();   
-      }
-      catch ( InterruptedException e)
-        {System.out.println(e);}
-        
-        
-        //check if ther is a space in the buffer
-       
-    while(!buffer.isEmpty){//while buffer is full
-       semaphore.release(); //release the semaphore
-       System.out.println("Unable to add message to buffer");
-       Delay.skip(10);//and delay for a while and check the buffer again.
-           
-            try {
-                semaphore.acquire();
-            }
-            catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
-    }
-    
-    //Do the opperations that adds the message to the buffer
-    postMessage();
-    semaphore.release();
-    Delay.skip(10);*/
-  
-        
+
         }
         }
     
