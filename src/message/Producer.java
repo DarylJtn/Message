@@ -48,7 +48,7 @@ public class Producer extends Thread {
         
         while(true){
             
-    
+    //get the message from the buffer
      buffer.addMessage(generateString(randString));
      Delay.idleUpTo(3);
 
