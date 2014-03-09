@@ -15,24 +15,40 @@ public class Buffer {
     String message;
     Semaphore semaphore;
     boolean isEmpty = true;
+    int numCon; //number of consumers
+    int numReads;//number of times the messages have been read
     
-    
-    
+
     
     public Buffer(Semaphore s){
     semaphore = s;
     }
     
     
-     public Buffer(){
-        
+     public Buffer(int consumer){
+        this.numCon = consumer;
+        numReads = consumer;
     }
     
     
     public void addMessage(String s){
     
+        System.out.println("AddMessageCalled");
+        
+        //try to aquire the semaphore
+        try { mutex.acquire(); }
+        catch (InterruptedException e) {}
+        
+            while (numCon != numReads) {//if the number of consumers does not = the number of times the message has been read
+                 mutex.release(); 
+                 Delay.idleUpTo(10);
+                 try { mutex.acquire(); }
+            catch (InterruptedException e) {}
+            }
+        System.out.println("Posting message: "+ s+"//numCon: "+ numCon);
     message = s;
-    
+    numReads = 0;
+    mutex.release();
     }
     
     public String readMessage(){
