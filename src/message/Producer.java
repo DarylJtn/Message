@@ -50,7 +50,7 @@ public class Producer extends Thread {
             
     
      buffer.addMessage(generateString(randString));
-     Delay.idleUpTo(15);
+     Delay.idleUpTo(3);
 
             
             

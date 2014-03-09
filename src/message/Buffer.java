@@ -12,12 +12,12 @@ import java.util.concurrent.Semaphore;
  */
 public class Buffer {
     Semaphore mutex = new Semaphore(1);
-    String message;
+    public String message = null;
     Semaphore semaphore;
     boolean isEmpty = true;
     int numCon; //number of consumers
     int numReads;//number of times the messages have been read
-    
+    String bufferMessage;
 
     
     public Buffer(Semaphore s){
@@ -33,7 +33,6 @@ public class Buffer {
     
     public void addMessage(String s){
     
-        System.out.println("AddMessageCalled");
         
         //try to aquire the semaphore
         try { mutex.acquire(); }
@@ -51,9 +50,25 @@ public class Buffer {
     mutex.release();
     }
     
-    public String readMessage(){
-    return message;
+    public String readMessage(String lastRead){
     
+        try { mutex.acquire(); }
+        catch (InterruptedException e) {}
+                
+    
+    while (message.equals(lastRead)) {//if the number of consumers does not = the number of times the message has been read
+                 mutex.release(); 
+                 Delay.idleUpTo(10);
+                 try { mutex.acquire(); }
+            catch (InterruptedException e) {}
+            }
+    bufferMessage = message;
+    numReads++;
+    mutex.release(); 
+
+        return bufferMessage;
+        
+       
     }
     
     public Boolean isEmpty(){
