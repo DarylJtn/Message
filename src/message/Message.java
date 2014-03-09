@@ -18,7 +18,7 @@ public class Message {
     public static void main(String[] args) {
         // TODO code application logic here
        
-        Buffer buffer = new Buffer();//messages will be stored here
+        Buffer buffer = new Buffer(3);//messages will be stored here
         
         Producer producer = new Producer(buffer);
         producer.start();

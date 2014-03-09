@@ -20,10 +20,7 @@ public class Producer extends Thread {
   Random randString = new Random();
   
   public void postMessage(){
-  System.out.println("Posting Message to Buffer:  "+generateString(randString));
 
-  buffer.addMessage(generateString(randString));
-  buffer.isEmpty=false;
   
   
   }
@@ -42,7 +39,7 @@ public class Producer extends Thread {
   //take global spmaphore and buffer class
   public Producer(Buffer b){
 
-  buffer = b;
+  this.buffer = b;
   }
   
   
@@ -50,6 +47,15 @@ public class Producer extends Thread {
     public void run() {
         
         while(true){
+            
+    
+     buffer.addMessage(generateString(randString));
+     Delay.idleUpTo(15);
+
+            
+            
+            
+            
     //System.out.println(generateString());
   /*   
       //try to aquire the semaphore   
