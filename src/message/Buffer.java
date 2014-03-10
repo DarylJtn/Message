@@ -15,19 +15,24 @@ public class Buffer {
     public String message = null;
     Semaphore semaphore;
     boolean isEmpty = true;
+    int front = 0;
+    int rear  = 0;
     int numCon; //number of consumers
     int numReads;//number of times the messages have been read
     String bufferMessage;
-
+    int slots;//number of slots in the buffer that messages can be stored in
+    String messages[];
+    int count;//count of the number of messages stored
     
     public Buffer(Semaphore s){
     semaphore = s;
     }
     
     
-     public Buffer(int consumer){
+     public Buffer(int consumer, int s){
         this.numCon = consumer;
         numReads = consumer;
+        slots = s;
     }
     
     
@@ -47,6 +52,9 @@ public class Buffer {
         System.out.println("Posting message: "+ s+"//numCon: "+ numCon);
     message = s;
     numReads = 0;
+    messages[rear] = s;
+        rear = (rear + 1) % slots;
+        count = count + 1;
     mutex.release();
     }
     
