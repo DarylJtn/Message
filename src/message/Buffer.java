@@ -21,7 +21,8 @@ public class Buffer {
     int numReads;//number of times the messages have been read
     String bufferMessage;
     int slots;//number of slots in the buffer that messages can be stored in
-    String messages[];
+     private String[] messages;
+     
     int count;//count of the number of messages stored
     
     public Buffer(Semaphore s){
@@ -33,6 +34,7 @@ public class Buffer {
         this.numCon = consumer;
         numReads = consumer;
         slots = s;
+        messages = new String[10];
     }
     
     
@@ -49,11 +51,12 @@ public class Buffer {
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
+            Delay.idleUpTo(10);
         System.out.println("Posting message: "+ s+"//numCon: "+ numCon);
     message = s;
     numReads = 0;
-    messages[rear] = s;
-        rear = (rear + 1) % slots;
+    messages[0] = s;
+        rear = rear + 1;
         count = count + 1;
     mutex.release();
     }
@@ -70,6 +73,7 @@ public class Buffer {
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
+    Delay.idleUpTo(10);
     bufferMessage = message;
     numReads++;
     mutex.release(); 
