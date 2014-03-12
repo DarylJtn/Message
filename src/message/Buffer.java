@@ -12,7 +12,7 @@ import java.util.concurrent.Semaphore;
  */
 public class Buffer {
     Semaphore mutex = new Semaphore(1);
-    public String message = null;
+    public String message = "empty";
     Semaphore semaphore;
     boolean isEmpty = true;
     int front = 0;
@@ -22,7 +22,7 @@ public class Buffer {
     String bufferMessage;
     int slots;//number of slots in the buffer that messages can be stored in
      private String[] messages;
-     
+    int numMessages = 0;
     int count;//count of the number of messages stored
     
     public Buffer(Semaphore s){
@@ -45,36 +45,48 @@ public class Buffer {
         try { mutex.acquire(); }
         catch (InterruptedException e) {}
         
-            while (numCon != numReads) {//if the number of consumers does not = the number of times the message has been read
+            while (numMessages >= slots) {//if the number of consumers does not = the number of times the message has been read
                  mutex.release(); 
-                 Delay.idleUpTo(10);
+                 Delay.idleUpTo(5);
+                 System.out.println("addmessage waiting");
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
-            Delay.idleUpTo(10);
-        System.out.println("Posting message: "+ s+"//numCon: "+ numCon);
+            Delay.idleUpTo(5);
+        System.out.println("Posting message: "+ s+"//numCon: "+ numCon+"// Array Placement "+ count);
     message = s;
     numReads = 0;
-    messages[0] = s;
-        rear = rear + 1;
-        count = count + 1;
+    messages[count] = s;
+    rear = rear + 1;
+    count = count + 1;
+    numMessages++;
+    Delay.idleUpTo(5);
     mutex.release();
+    Delay.idleUpTo(5);
     }
     
-    public String readMessage(String lastRead){
+    public String readMessage(String lastRead, int pointer){
     
         try { mutex.acquire(); }
         catch (InterruptedException e) {}
-                
-    
-    while (message.equals(lastRead)) {//if the number of consumers does not = the number of times the message has been read
-                 mutex.release(); 
+     
+        while (pointer >=count) {//if the number of consumers does not = the number of times the message has been read
+                 
+        mutex.release(); 
                  Delay.idleUpTo(10);
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
-    Delay.idleUpTo(10);
-    bufferMessage = message;
+        
+    while (messages[pointer].equals(lastRead)||messages[pointer].equals("empty")) {//if the number of consumers does not = the number of times the message has been read
+                 
+        mutex.release(); 
+                 Delay.idleUpTo(10);
+                 try { mutex.acquire(); }
+            catch (InterruptedException e) {}
+            }
+    Delay.idleUpTo(15);
+    bufferMessage = messages[pointer];
     numReads++;
     mutex.release(); 
 
