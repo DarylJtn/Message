@@ -1,4 +1,4 @@
-COM577 Concurrent and Distributed Systems
+ Concurrent and Distributed Systems
 Assignment 1
 Date Set: 18 February 2014
 Date Due: 14 March 2014
