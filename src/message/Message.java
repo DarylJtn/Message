@@ -17,8 +17,8 @@ public class Message {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       
-        Buffer buffer = new Buffer(6);//messages will be stored here
+        int numConsumer = 4;//number of consumers
+        Buffer buffer = new Buffer(numConsumer);//messages will be stored here
         
         Producer producer = new Producer(buffer);
         producer.start();
@@ -31,9 +31,9 @@ public class Message {
         con3.start();
         Consumer con4 = new Consumer(buffer,"Consumer Four");
         con4.start();
-        Consumer con5 = new Consumer(buffer,"Consumer Five");
-        con5.start();
-        Consumer con6 = new Consumer(buffer, "Consumer Six");
-        con6.start();
+        //Consumer con5 = new Consumer(buffer,"Consumer Five");
+        //con5.start();
+        //Consumer con6 = new Consumer(buffer, "Consumer Six");
+        //con6.start();
     }
 }
