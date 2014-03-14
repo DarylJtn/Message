@@ -14,9 +14,6 @@ public class Buffer {
     Semaphore mutex = new Semaphore(1);
     public String message = "empty";
     Semaphore semaphore;
-    boolean isEmpty = true;
-    int front = 0;
-    int rear  = 0;
     int numCon; //number of consumers
     //int numReads;//number of times the messages have been read
     String bufferMessage;
@@ -50,12 +47,12 @@ public class Buffer {
             while (numMessages >= slots) {//if the number of consumers does not = the number of times the message has been read
                  mutex.release(); 
                  Delay.idleUpTo(5);
-                 System.out.println("addmessage waiting");
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
             Delay.idleUpTo(5);
-           if(count==20){
+           
+            if(count==20){//if the program is using the end of the array reset the account and reuse the start of the array
             count = 0;
              }
             System.out.println("Posting message: "+ s+"//numCon: "+ numCon+"// Array Placement "+ count);
@@ -63,7 +60,6 @@ public class Buffer {
    // numReads = 0;
 
     messages[count] = s;
-    rear = rear + 1;
     count = count + 1;
     numMessages++;
     Delay.idleUpTo(5);
@@ -74,21 +70,12 @@ public class Buffer {
     
         try { mutex.acquire(); }
         catch (InterruptedException e) {}
-     
-      /*  while (pointer >=10) {//if the number of consumers does not = the number of times the message has been read
-                 
-        mutex.release(); 
-                 Delay.idleUpTo(10);
-                 try { mutex.acquire(); }
-            catch (InterruptedException e) {}
-            }*/
+    
         
            if (numCon==numReads[pointer]){
    //notify the program that the message has been read by all of the consumers 
        numReads[pointer] = 0;
        numMessages--;
-      System.out.println("Num Message --");
-
    }
         
     while (messages[pointer].equals(lastRead)||messages[pointer].equals("empty")) {//if the number of consumers does not = the number of times the message has been read
@@ -100,7 +87,7 @@ public class Buffer {
             catch (InterruptedException e) {}
             }
     
-    Delay.idleUpTo(20);
+    Delay.idleUpTo(5);
    
    
    
@@ -117,14 +104,8 @@ public class Buffer {
     mutex.release(); 
       
         return bufferMessage;
-        
-       
     }
     
-    public Boolean isEmpty(){
-    //todo add a system where it checks if the message has been read by all of the users
-    
-    return isEmpty;
-    }
+
     
 }

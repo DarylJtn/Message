@@ -40,7 +40,7 @@ public class Consumer extends Thread {
     pointer = 0;
     }else{
      pointer++;}
-    Delay.idleUpTo(10);
+    Delay.idleUpTo(5);
             }
     
     }
