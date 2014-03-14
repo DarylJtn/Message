@@ -11,23 +11,18 @@ import java.util.concurrent.Semaphore;
  * @author daryljohnston
  */
 public class Buffer {
-    Semaphore mutex = new Semaphore(1);
-    public String message = null;
-    Semaphore semaphore;
-    boolean isEmpty = true;
+    Semaphore mutex = new Semaphore(1);//create an instance to the semaphore to sync the process
+    public String message = null;//a variable for the message that the producer puts through
     int numCon; //number of consumers
     int numReads;//number of times the messages have been read
-    String bufferMessage;
+    String bufferMessage;//a temp string 
 
-    
-    public Buffer(Semaphore s){
-    semaphore = s;
-    }
     
     
      public Buffer(int consumer){
-        this.numCon = consumer;
-        numReads = consumer;
+        numCon = consumer;
+        numReads = consumer;//The number of reads is set to the number of consumers
+                            //so that the program starts adding messages sucessfully
     }
     
     
@@ -39,15 +34,15 @@ public class Buffer {
         catch (InterruptedException e) {}
         
             while (numCon != numReads) {//if the number of consumers does not = the number of times the message has been read
-                 mutex.release(); 
+                 mutex.release(); //release semaphore delay and aquire it until a new message is needed
                  Delay.idleUpTo(10);
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
-        System.out.println("Posting message: "+ s+"//numCon: "+ numCon);
-    message = s;
-    numReads = 0;
-    mutex.release();
+        System.out.println("Posting message: "+ s);//notify cosole message is printed
+    message = s;//assign the string passed in to the buffers message variable
+    numReads = 0;//reset the numReads varable to stop new messages being posted
+    mutex.release();//release semaphore, allow other threads to function
     }
     
     public String readMessage(String lastRead){
@@ -62,8 +57,10 @@ public class Buffer {
                  try { mutex.acquire(); }
             catch (InterruptedException e) {}
             }
-    bufferMessage = message;
-    numReads++;
+    bufferMessage = message;//assign the buffers message to a new string so that 
+                            //the semaphore can be released before returning the message
+    numReads++;//increase num reads so that addmessage can post a message in cases
+                //where all the consumers have read the message
     mutex.release(); 
 
         return bufferMessage;
@@ -71,10 +68,6 @@ public class Buffer {
        
     }
     
-    public Boolean isEmpty(){
-    //todo add a system where it checks if the message has been read by all of the users
-    
-    return isEmpty;
-    }
+
     
 }
