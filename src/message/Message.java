@@ -1,6 +1,7 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
+ * question 1
  */
 package message;
 
@@ -16,14 +17,13 @@ public class Message {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         int numConsumer = 4;//number of consumers
         Buffer buffer = new Buffer(numConsumer);//messages will be stored here
         
-        Producer producer = new Producer(buffer);
-        producer.start();
+        Producer producer = new Producer(buffer);//create an instance of producer
+        producer.start();//start the producer thread
         
-        Consumer con1 = new Consumer(buffer,"Consumer One");
+        Consumer con1 = new Consumer(buffer,"Consumer One");//create a consumer and pass in the buffer
         con1.start();
         Consumer con2 = new Consumer(buffer,"Consumer Two");
         con2.start();

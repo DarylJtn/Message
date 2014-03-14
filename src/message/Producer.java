@@ -16,19 +16,14 @@ import java.util.logging.Logger;
  */
 public class Producer extends Thread {
  
-  Buffer buffer;
-  Random randString = new Random();
+  Buffer buffer;//an instance of buffer that will be created in the message.java class
+  Random randString = new Random();//instance of random so that a random string can be made
   
-  public void postMessage(){
-
-  
-  
-  }
     public static String generateString(Random rng)
 {
-    String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char[] text = new char[20];
-    for (int i = 0; i < 20; i++)
+    String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//characters that can be used in rand string
+    char[] text = new char[20];//new array of char's that has 20 valuse
+    for (int i = 0; i < 20; i++)//for each item in the text array
     {
         text[i] = characters.charAt(rng.nextInt(characters.length()));
     }
