@@ -19,11 +19,6 @@ public class Producer extends Thread {
   Buffer buffer;
   Random randString = new Random();
   
-  public void postMessage(){
-
-  
-  
-  }
     public static String generateString(Random rng)
 {
     String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -50,10 +45,7 @@ public class Producer extends Thread {
             
     
      buffer.addMessage(generateString(randString));
-
-            
-            
-            
+ 
    
         
         }
