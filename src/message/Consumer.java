@@ -33,7 +33,7 @@ public class Consumer extends Thread {
     public void run() {
     
             while(true){
-       Delay.idleUpTo(19);     
+       Delay.idleUpTo(5);     
     message = buffer.readMessage(message, pointer);
      System.out.println(name+ " Read Message "+ message+"// Current Pointer: "+pointer);
     if(pointer==9){

@@ -32,11 +32,11 @@ public class Buffer {
     
     
      public Buffer(int consumer, int s){
-        this.numCon = consumer;
+        numCon = consumer;
       //  numReads = consumer;
         slots = s;
-        messages = new String[10];
-        numReads = new int[10];//keeps a count of the number of times each message has ben read
+        messages = new String[20];
+        numReads = new int[20];//keeps a count of the number of times each message has ben read
     }
     
     
@@ -55,7 +55,7 @@ public class Buffer {
             catch (InterruptedException e) {}
             }
             Delay.idleUpTo(5);
-           if(count==10){
+           if(count==20){
             count = 0;
              }
             System.out.println("Posting message: "+ s+"//numCon: "+ numCon+"// Array Placement "+ count);
@@ -100,7 +100,7 @@ public class Buffer {
             catch (InterruptedException e) {}
             }
     
-    Delay.idleUpTo(30);
+    Delay.idleUpTo(20);
    
    
    
