@@ -1,3 +1,7 @@
+This is a java application used to demonstrate concurrent programming in java. Two java classes will send and recieve messages at the same time using threads and use semaphores to ensure that they are syncronized
+
+/
+
  Concurrent and Distributed Systems
 Assignment 1
 Date Set: 18 February 2014
